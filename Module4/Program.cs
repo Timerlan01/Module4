@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tima.BLL;
 using Tima.DAL;
 
 namespace Module4
 {
     public class Program
     {
+        public static ServiceClient service = new ServiceClient();
         static void Main(string[] args)
         {
-            ServiceClient service = new ServiceClient();
-            
+           
             Console.WriteLine("Выберите действие:");
             Console.WriteLine("1. Регистрация");
             Console.WriteLine("2. Авторизация");
@@ -19,55 +20,57 @@ namespace Module4
             {
                 Client newClient = new Client();
 
-                Console.WriteLine("Введите иин:");
+                Console.Write("Введите иин:");
                 newClient.Iin = Console.ReadLine();
 
-                Console.WriteLine("Введите почту:");
+                Console.Write("Введите почту:");
                 newClient.Email = Console.ReadLine();
 
-                Console.WriteLine("Введите фамилию:");
-                string Fname = Console.ReadLine();
+                Console.Write("Введите фамилию:");
+                newClient.Fname = Console.ReadLine();
 
-                Console.WriteLine("Введите имя:");
-                string Sname = Console.ReadLine();
+                Console.Write("Введите имя:");
+                newClient.Sname = Console.ReadLine();
 
-                Console.WriteLine("Введите отчество:");
-                string Mname = Console.ReadLine();
+                Console.Write("Введите отчество:");
+                newClient.Mname = Console.ReadLine();
 
-                service.CreateClient(newClient);
+                Console.Write("Введите логин:");
+                newClient.Login = Console.ReadLine();
+
+                Console.Write("Введите пароль");
+                newClient.Password= Console.ReadLine();
+
+                
+                bool result = service.Registration(newClient);
+                if(result = true)
+                {
+                    Console.Write("Ошибка");
+                }
 
             }
             else if (choice == "2")
             {
-                Console.WriteLine("Введите логин:");
+                Console.Write("Введите логин:");
                 string login = Console.ReadLine();
 
-                Console.WriteLine("Введите пароль:");
+                Console.Write("Введите пароль:");
                 string password = Console.ReadLine();
 
-                Console.WriteLine("Авторизация успешна.");
-
-                Client findClient = service.GetClient(login, password);
-
+               
+                Client client = service.Auth(login, password);
+                if (client != null)
+                {
+                    Console.Clear();//cls
+                    Console.Write("ПРиветсвую тебя {0}",client.Getshortname);
+                }
+                else
+                {
+                    Console.Write("Авторизация не прошла!");
+                }
 
             }
-
-            Client client = new Client();
-            client.Iin = "04101050105";
-            client.Email = "alimbekovtimerlan@gmail.com";
-            client.Fname = "Alimbekov";
-            client.Sname = "Timerlan";
-            client.Mname = "Tursunovych";
-
-            client.CreateDate = new DateTime(2004, 10, 10);
-           
-            /// service.CreateClient(client);
-            List<Client> clients = service.GetAllClients();
-            foreach (Client item in clients)
-            {
-                Console.WriteLine("{0}. {1}", item.Id, item.Getshortname);
-            }
-
+            Console.ReadKey();
         }
     }
 }

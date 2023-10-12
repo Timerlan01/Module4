@@ -21,8 +21,13 @@ namespace Tima.DAL
         {
             get
             {
-                return string.Format("{0} {1}. {2}.",
-                Fname, Sname[0], Mname[0]);
+                if (!string.IsNullOrWhiteSpace(Mname))
+                {
+                    return string.Format("{0} {1}. {2}.",
+                    Fname, Sname[0], Mname[0]);
+                }
+                else 
+                    return string.Format("{0} {1}.",Fname,Sname[0]);
             }
         }
         public string Phone { get; set; }

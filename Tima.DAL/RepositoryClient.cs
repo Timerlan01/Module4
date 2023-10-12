@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LiteDB;
 namespace Tima.DAL
 {
-    public class ServiceClient
+    public class RepositoryClient
     {
         public bool CreateClient(Client client)
         {
@@ -30,7 +30,15 @@ namespace Tima.DAL
         }
         public Client GetClientById(int id)
         {
-            return null;
+            Client client = null;
+            using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
+            {
+                {
+                  client = db.GetCollection<Client>()
+                  .FindById(id);
+                }
+            }
+            return client;
         }
 
         public Client GetClient(string login, string password)
