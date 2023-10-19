@@ -8,11 +8,19 @@ using Tima.DAL;
 
 namespace Tima.BLL
 {
-    public class ServiceClient
+    public class ServiceClient : Service
     {
+        private readonly RepositoryClient service = null;
+        private readonly string path;
+        public ServiceClient(string path)
+            :base(path)
+        {
+            this.path = path;
+            service = new RepositoryClient(path);
+        }
         public bool Registration(Client client)
         {
-            RepositoryClient service = new RepositoryClient();
+           
             bool result = service.CreateClient(client);
 
             return result;
@@ -27,3 +35,4 @@ namespace Tima.BLL
         }
     }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Tima.BLL;
 using Tima.DAL;
+using Tima.DAL.Enum;
 
 namespace Module4
 {
@@ -41,11 +42,19 @@ namespace Module4
                 Console.Write("Введите пароль");
                 newClient.Password= Console.ReadLine();
 
-                
+                Gender gen;
+                for (gen = Gender.female; gen <= Gender.male; gen++)
+                {
+                    Console.WriteLine($"{ (int)gen}.
+                       { gen.ToString()}");
+                }
+               string genCh = Console.ReadLine();
+                    newClient.Gender = Gender.male;
+
                 bool result = service.Registration(newClient);
                 if(result = true)
                 {
-                    Console.Write("Ошибка");
+                    Console.Write("Успешно создан");
                 }
 
             }

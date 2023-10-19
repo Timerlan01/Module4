@@ -8,6 +8,16 @@ namespace Tima.DAL
 {
     public class RepositoryClient
     {
+        private readonly string path;
+        public RepositoryClient(string path)
+        {
+            this.path = path;
+        }
+
+        public RepositoryClient()
+        {
+        }
+
         public bool CreateClient(Client client)
         {
             using (var db = new LiteDatabase(@"C:\Temp\MyData.db"))
@@ -47,9 +57,6 @@ namespace Tima.DAL
             {
                 return db.GetCollection<Client>("Client")
                 .FindAll().First(f => f.Login == login && f.Password == password);
-
-
-
             }
         }
     }

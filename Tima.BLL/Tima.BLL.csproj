@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service.cs" />
+    <Compile Include="ServiceAccount.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

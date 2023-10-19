@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tima.DAL.Enum;
 
 namespace Tima.DAL
 {
@@ -10,6 +11,7 @@ namespace Tima.DAL
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
+        public Gender Gender { get; set; }  
         public string Iin { get; set; }
         public string Fname { get; set; }
         public string Sname { get; set; }
